@@ -1,6 +1,8 @@
+import { Kind } from "./Kind";
+
 export type Deployment = {
     apiVersion: string;                     // API version, e.g., "apps/v1"
-    kind: string;                           // The resource type, e.g., "Deployment"
+    kind: Kind;                             // The resource type, e.g., "Deployment"
     metadata: Metadata;                     // Metadata for the deployment (name, namespace, labels, annotations)
     spec: DeploymentSpec;                   // The desired state specification for the deployment
 };

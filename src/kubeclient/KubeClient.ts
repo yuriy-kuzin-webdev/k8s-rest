@@ -1,9 +1,5 @@
-import { Resource } from "../types";
-
-export enum K8S {
-    Namespace = 'Namespace',
-    Deployment = 'Deployment'
-}
+import { KubernetesObject } from "../types";
+import { Kind } from "../types/Kind";
 
 type KubeClientOptions = {
     url: string;
@@ -22,29 +18,29 @@ export class KubeClient {
         this.namespace = options.namespace;
     }
 
-    private getEndpoint(resource: K8S) {
-        switch (resource) {
-            case K8S.Namespace: return this.url + '/api/v1/namespaces';
-            case K8S.Deployment: return this.url + `/apis/apps/v1/namespaces/${this.namespace}/deployments`
+    private getEndpoint(kind: Kind) {
+        switch (kind) {
+            case Kind.Namespace: return this.url + '/api/v1/namespaces';
+            case Kind.Deployment: return this.url + `/apis/apps/v1/namespaces/${this.namespace}/deployments`
         }
     }
 
-    async exec({ payload, resource }: { payload: Resource, resource: K8S }): Promise<void> {
-        const url = this.getEndpoint(resource);
+    async exec({ kubernetesObject }: { kubernetesObject: KubernetesObject }): Promise<void> {
+        const url = this.getEndpoint(kubernetesObject.kind);
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 "Authorization": `Bearer ${this.token}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(kubernetesObject),
         })
 
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(`Failed to create ${resource}: ${response.statusText} - ${errorText}`);
+            throw new Error(`Failed to create ${kubernetesObject}: ${response.statusText} - ${errorText}`);
         }
 
-        console.log(`${resource} successfully applied.`);
+        console.log(`${kubernetesObject} successfully applied.`);
     }
 }

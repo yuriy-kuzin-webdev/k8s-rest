@@ -1,6 +1,8 @@
+import { Kind } from "./Kind";
+
 export type Namespace = {
     apiVersion: string;                     // API version, e.g., "v1"
-    kind: string;                           // The resource type, e.g., "Namespace"
+    kind: Kind;                             // The resource type, e.g., "Namespace"
     metadata: Metadata;                     // Metadata for the namespace (name, labels, annotations)
     spec?: NamespaceSpec;                   // Optional spec field to define behaviors related to the namespace
     status?: NamespaceStatus;               // Optional status field to describe the current state of the namespace
