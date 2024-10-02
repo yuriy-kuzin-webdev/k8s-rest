@@ -16,3 +16,7 @@ kubectl apply -f service-account-token.yaml
 ```bash
 kubectl get secret automation-sa-token -n default -o jsonpath='{.data.token}' | base64 --decode
 ```
+- bypass SSL
+```bash
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+```
