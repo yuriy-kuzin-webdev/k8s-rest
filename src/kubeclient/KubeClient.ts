@@ -36,11 +36,13 @@ export class KubeClient {
             body: JSON.stringify(kubernetesObject),
         })
 
+        // TODO add logic to handle failures
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(`Failed to create ${kubernetesObject}: ${response.statusText} - ${errorText}`);
         }
 
+        // TODO import logger
         console.log(`${kubernetesObject} successfully applied.`);
     }
 }

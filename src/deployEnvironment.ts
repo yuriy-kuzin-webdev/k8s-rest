@@ -1,5 +1,5 @@
 import { KubeClient } from "./kubeclient/KubeClient";
-import { configureEnvironment } from "./configureEnvironment";
+import { configureEnvironment } from "./configuration/environment";
 
 const token = process.env.KUBE_TOKEN || '';
 const url = process.env.KUBE_URL || '';
