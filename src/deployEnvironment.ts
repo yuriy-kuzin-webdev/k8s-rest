@@ -5,7 +5,7 @@ const token = process.env.KUBE_TOKEN || '';
 const url = process.env.KUBE_URL || '';
 
 export const deployEnvironment = async (clientId: string) => {
-    if(!clientId) {
+    if (!clientId) {
         return;
     }
 
@@ -15,17 +15,22 @@ export const deployEnvironment = async (clientId: string) => {
         namespace: clientId,
     });
 
-    const { 
+    const {
         namespace,
+        configmaps,
         services,
     } = configureEnvironment(clientId);
 
-    await client.exec({ kubernetesObject: namespace })
+    await client.exec({ kubernetesObject: namespace });
+
+    for (const cmap of configmaps) {
+        await client.exec({ kubernetesObject: cmap });
+    }
 
     for (const service of services) {
-        await client.exec({ kubernetesObject: service })
+        await client.exec({ kubernetesObject: service });
         await client.wait({ kubernetesObject: service });
     }
 }
 
-deployEnvironment();
+deployEnvironment('test44444v');
