@@ -6,7 +6,7 @@ import { configurePrometheus } from "./prometheus";
 export function configureServices(clientId: string): KubernetesObject[] {
     return [
         configureCoreDB(clientId),
-        configurePrometheus(clientId),
-        configureGrafana(clientId),
+        // configurePrometheus(clientId),
+        // configureGrafana(clientId),
     ];
 }

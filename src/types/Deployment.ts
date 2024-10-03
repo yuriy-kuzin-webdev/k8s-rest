@@ -81,10 +81,15 @@ export type ResourceList = {
 };
 
 export type Probe = {
-    httpGet: HTTPGetAction;                 // HTTP GET action for probing
+    httpGet?: HTTPGetAction;                // HTTP GET action for probing
     initialDelaySeconds?: number;           // Delay before starting the probe (optional)
     periodSeconds?: number;                 // Period to perform the probe (optional)
+    tcpSocket?: TCPAction;
 };
+
+export type TCPAction = {
+    port?: number
+}
 
 export type HTTPGetAction = {
     path: string;                           // Path to probe

@@ -5,6 +5,9 @@ const token = process.env.KUBE_TOKEN || '';
 const url = process.env.KUBE_URL || '';
 
 export const deployEnvironment = async (clientId: string) => {
+    if(!clientId) {
+        return;
+    }
 
     const client = new KubeClient({
         url,
@@ -21,7 +24,8 @@ export const deployEnvironment = async (clientId: string) => {
 
     for (const service of services) {
         await client.exec({ kubernetesObject: service })
+        await client.wait({ kubernetesObject: service });
     }
 }
 
-deployEnvironment('test');
+deployEnvironment();
