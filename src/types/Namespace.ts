@@ -1,5 +1,6 @@
 import { Kind } from "./Kind";
 
+
 export type Namespace = {
     apiVersion: string;                     // API version, e.g., "v1"
     kind: Kind;                             // The resource type, e.g., "Namespace"

@@ -1,18 +1,21 @@
 import { KubernetesObject } from "../../../types";
 import { Kind } from "../../../types/Kind";
+import { PROMETHEUS } from "../../constants";
 
 
-const DEPLOYMENT_API_VERSION = "apps/v1";
-const SERVICE_NAME = "prometheus";
-const IMAGE = "prom/prometheus:v2.53.0";
+const {
+    DEPLOYMENT_API_VERSION,
+    IMAGE,
+    PROM_CONFIG,
+    SERVICE_NAME,
+} = PROMETHEUS;
 
 export function configurePrometheus(clientId: string): KubernetesObject {
-    const PROM_CONFIG = `prometheus-config-${clientId}`
     return {
         apiVersion: DEPLOYMENT_API_VERSION,
         kind: Kind.Deployment,
         metadata: {
-            name: `${SERVICE_NAME}-${clientId}`,
+            name: SERVICE_NAME,
             namespace: clientId,
             labels: {
                 app: SERVICE_NAME

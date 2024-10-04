@@ -1,8 +1,7 @@
 import { Kind } from "../../types/Kind";
 import { Namespace } from "../../types/Namespace";
+import { NAMESPACE_API_VERSION } from "../constants";
 
-
-const NAMESPACE_API_VERSION = "v1";
 
 export function configureNamespace(clientId: string): Namespace {
     return {

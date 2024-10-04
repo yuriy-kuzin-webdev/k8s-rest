@@ -1,17 +1,20 @@
 import { KubernetesObject } from "../../../types";
 import { Kind } from "../../../types/Kind";
+import { COREDB } from "../../constants";
 
 
-const DEPLOYMENT_API_VERSION = "apps/v1";
-const SERVICE_NAME = "postgresql";
-const IMAGE = "postgres:16";
+const {
+    DEPLOYMENT_API_VERSION,
+    IMAGE,
+    SERVICE_NAME,
+} = COREDB;
 
 export function configureCoreDB(clientId: string): KubernetesObject {
     return {
         apiVersion: DEPLOYMENT_API_VERSION,
         kind: Kind.Deployment,
         metadata: {
-            name: `${SERVICE_NAME}-${clientId}`,
+            name: SERVICE_NAME,
             namespace: clientId,
             labels: {
                 app: SERVICE_NAME

@@ -1,15 +1,19 @@
 import { KubernetesObject } from "../../../types";
 import { Kind } from "../../../types/Kind";
+import { PROMETHEUS } from "../../constants";
 
 
-const CONFIGMAP_API_VERSION = "v1";
+const {
+    CONFIGMAP_API_VERSION,
+    PROM_CONFIG,
+} = PROMETHEUS;
 
 export function configurePrometheusConfigMap(clientId: string): KubernetesObject {
     return {
         apiVersion: CONFIGMAP_API_VERSION,
         kind: Kind.ConfigMap,
         metadata: {
-            name: `prometheus-config-${clientId}`,
+            name: PROM_CONFIG,
             namespace: clientId
         },
         data: {

@@ -3,6 +3,7 @@ import { configureConfigMaps } from "./configmap";
 import { configureNamespace } from "./namespace";
 import { configureServices } from "./services";
 
+
 export function configureEnvironment(clientId: string): {
     namespace: KubernetesObject,
     configmaps: KubernetesObject[],

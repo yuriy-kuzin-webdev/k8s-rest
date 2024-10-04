@@ -1,5 +1,6 @@
 import { Kind } from "./Kind";
 
+
 export type Deployment = {
     apiVersion: string;                     // API version, e.g., "apps/v1"
     kind: Kind;                             // The resource type, e.g., "Deployment"

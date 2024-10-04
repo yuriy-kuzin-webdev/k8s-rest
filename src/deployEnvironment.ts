@@ -1,6 +1,7 @@
 import { KubeClient } from "./kubeclient/KubeClient";
 import { configureEnvironment } from "./configuration/environment";
 
+
 const token = process.env.KUBE_TOKEN || '';
 const url = process.env.KUBE_URL || '';
 
@@ -33,4 +34,4 @@ export const deployEnvironment = async (clientId: string) => {
     }
 }
 
-deployEnvironment('test44444v');
+deployEnvironment('test10v01');
