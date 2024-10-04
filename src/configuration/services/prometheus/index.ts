@@ -1,77 +1,33 @@
-import { Deployment } from "../../../types/Deployment";
 import { Kind } from "../../../types/Kind";
+import { Service } from "../../../types/Service";
 import { PROMETHEUS } from "../../constants";
 
 
 const {
-    DEPLOYMENT_API_VERSION,
-    IMAGE,
-    PROM_CONFIG,
+    PORT,
+    SERVICE_API_VERSION,
     SERVICE_NAME,
 } = PROMETHEUS;
 
-// TODO Decomposition required
-export function configurePrometheus(clientId: string): Deployment {
+export function configurePrometheusService(clientId: string): Service {
     return {
-        apiVersion: DEPLOYMENT_API_VERSION,
-        kind: Kind.Deployment,
+        apiVersion: SERVICE_API_VERSION,
+        kind: Kind.Service,
         metadata: {
             name: SERVICE_NAME,
-            namespace: clientId,
-            labels: {
-                app: SERVICE_NAME
-            }
+            namespace: clientId
         },
         spec: {
-            replicas: 1,
             selector: {
-                matchLabels: {
-                    app: SERVICE_NAME
-                }
+                app: SERVICE_NAME,
             },
-            template: {
-                metadata: {
-                    labels: {
-                        app: SERVICE_NAME
-                    },
-                    name: SERVICE_NAME
-                },
-                spec: {
-                    containers: [
-                        {
-                            name: SERVICE_NAME,
-                            image: IMAGE,
-                            ports: [
-                                {
-                                    containerPort: 9090
-                                }
-                            ],
-                            readinessProbe: {
-                                httpGet: {
-                                    path: "/-/ready",
-                                    port: 9090
-                                },
-                                initialDelaySeconds: 15,
-                                periodSeconds: 5
-                            },
-                            volumeMounts: [
-                                {
-                                    name: "config-volume",
-                                    mountPath: "/etc/prometheus"
-                                }
-                            ]
-                        }
-                    ],
-                    volumes: [
-                        {
-                            name: "config-volume",
-                            configMap: {
-                                name: PROM_CONFIG
-                            }
-                        }
-                    ]
+            ports: [
+                {
+                    protocol: "TCP",
+                    port: PORT,
+                    targetPort: PORT,
                 }
-            }
+            ]
         }
     }
 }

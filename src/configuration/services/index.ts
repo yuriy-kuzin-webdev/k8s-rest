@@ -1,13 +1,12 @@
-import { Deployment } from "../../types/Deployment";
-import { configureCoreDB } from "./coreDB";
-import { configureGrafana } from "./grafana";
-import { configurePrometheus } from "./prometheus";
+import { Service } from "../../types/Service";
+import { configureCoreDbService } from "./coreDB";
+import { configurePrometheusService } from "./prometheus";
 
 
-export function configureServices(clientId: string): Deployment[] {
+export function configureServices(clientId: string): Service[] {
     return [
-        configureCoreDB(clientId),
-        configurePrometheus(clientId),
-        configureGrafana(clientId),
+        // TODO code duplicated
+        configureCoreDbService(clientId),
+        configurePrometheusService(clientId),
     ];
 }

@@ -1,5 +1,6 @@
 export enum Kind {
-    Namespace = 'Namespace',
-    Deployment = 'Deployment',
     ConfigMap = 'ConfigMap',
+    Deployment = 'Deployment',
+    Namespace = 'Namespace',
+    Service = 'Service',
 };

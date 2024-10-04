@@ -6,6 +6,7 @@ import { COREDB, GRAFANA, PROMETHEUS } from "../../constants";
 const {
     DEPLOYMENT_API_VERSION,
     IMAGE,
+    PORT,
     SERVICE_NAME,
 } = GRAFANA;
 
@@ -42,7 +43,7 @@ export function configureGrafana(clientId: string): Deployment {
                             image: IMAGE,
                             ports: [
                                 {
-                                    containerPort: 3000
+                                    containerPort: PORT
                                 }
                             ],
                             env: [
@@ -52,7 +53,7 @@ export function configureGrafana(clientId: string): Deployment {
                                 },
                                 {
                                     name: "GF_DATABASE_HOST",
-                                    value: `${COREDB.SERVICE_NAME}.${clientId}.svc.cluster.local:5432`
+                                    value: `${COREDB.SERVICE_NAME}.${clientId}.svc.cluster.local:${COREDB.PORT}`
                                 },
                                 {
                                     name: "GF_DATABASE_USER",
@@ -73,7 +74,7 @@ export function configureGrafana(clientId: string): Deployment {
                                             {
                                                 name: "Prometheus",
                                                 type: "prometheus",
-                                                url: `http://${PROMETHEUS.SERVICE_NAME}.${clientId}.svc.cluster.local:9090`,
+                                                url: `http://${PROMETHEUS.SERVICE_NAME}.${clientId}.svc.cluster.local:${PROMETHEUS.PORT}`,
                                                 access: "proxy"
                                             }
                                         ]
