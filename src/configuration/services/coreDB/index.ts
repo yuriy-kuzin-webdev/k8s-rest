@@ -1,4 +1,4 @@
-import { KubernetesObject } from "../../../types";
+import { Deployment } from "../../../types/Deployment";
 import { Kind } from "../../../types/Kind";
 import { COREDB } from "../../constants";
 
@@ -9,7 +9,8 @@ const {
     SERVICE_NAME,
 } = COREDB;
 
-export function configureCoreDB(clientId: string): KubernetesObject {
+// TODO Decomposition required
+export function configureCoreDB(clientId: string): Deployment {
     return {
         apiVersion: DEPLOYMENT_API_VERSION,
         kind: Kind.Deployment,

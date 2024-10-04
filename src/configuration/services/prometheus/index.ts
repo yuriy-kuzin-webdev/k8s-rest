@@ -1,4 +1,4 @@
-import { KubernetesObject } from "../../../types";
+import { Deployment } from "../../../types/Deployment";
 import { Kind } from "../../../types/Kind";
 import { PROMETHEUS } from "../../constants";
 
@@ -10,7 +10,8 @@ const {
     SERVICE_NAME,
 } = PROMETHEUS;
 
-export function configurePrometheus(clientId: string): KubernetesObject {
+// TODO Decomposition required
+export function configurePrometheus(clientId: string): Deployment {
     return {
         apiVersion: DEPLOYMENT_API_VERSION,
         kind: Kind.Deployment,

@@ -1,13 +1,13 @@
-import { KubernetesObject } from "../../types";
+import { Deployment } from "../../types/Deployment";
 import { configureCoreDB } from "./coreDB";
 import { configureGrafana } from "./grafana";
 import { configurePrometheus } from "./prometheus";
 
 
-export function configureServices(clientId: string): KubernetesObject[] {
+export function configureServices(clientId: string): Deployment[] {
     return [
         configureCoreDB(clientId),
         configurePrometheus(clientId),
-        // configureGrafana(clientId),
+        configureGrafana(clientId),
     ];
 }

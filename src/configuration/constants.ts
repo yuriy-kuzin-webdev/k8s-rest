@@ -9,6 +9,12 @@ export const COREDB = {
     SERVICE_NAME: "postgresql",
 }
 
+export const GRAFANA = {
+    DEPLOYMENT_API_VERSION,
+    IMAGE: "grafana/grafana:10.4.10",
+    SERVICE_NAME: "grafana",
+}
+
 export const PROMETHEUS = {
     CONFIGMAP_API_VERSION,
     DEPLOYMENT_API_VERSION,

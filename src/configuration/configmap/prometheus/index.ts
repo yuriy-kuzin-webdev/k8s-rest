@@ -1,4 +1,4 @@
-import { KubernetesObject } from "../../../types";
+import { ConfigMap } from "../../../types/ConfigMap";
 import { Kind } from "../../../types/Kind";
 import { PROMETHEUS } from "../../constants";
 
@@ -8,7 +8,7 @@ const {
     PROM_CONFIG,
 } = PROMETHEUS;
 
-export function configurePrometheusConfigMap(clientId: string): KubernetesObject {
+export function configurePrometheusConfigMap(clientId: string): ConfigMap {
     return {
         apiVersion: CONFIGMAP_API_VERSION,
         kind: Kind.ConfigMap,
