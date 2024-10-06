@@ -1,18 +1,17 @@
-import { Deployment } from "../../../types/Deployment";
-import { Kind } from "../../../types/Kind";
-import { PROMETHEUS } from "../../constants";
+import { Deployment } from "../../types/Deployment";
+import { Kind } from "../../types/Kind";
+import { COREDB } from "../constants";
 
 
 const {
     DEPLOYMENT_API_VERSION,
     IMAGE,
     PORT,
-    PROM_CONFIG,
     SERVICE_NAME,
-} = PROMETHEUS;
+} = COREDB;
 
 // TODO Decomposition required
-export function configurePrometheus(clientId: string): Deployment {
+export function configureCoreDB(clientId: string): Deployment {
     return {
         apiVersion: DEPLOYMENT_API_VERSION,
         kind: Kind.Deployment,
@@ -42,37 +41,36 @@ export function configurePrometheus(clientId: string): Deployment {
                         {
                             name: SERVICE_NAME,
                             image: IMAGE,
+                            env: [
+                                {
+                                    name: "POSTGRES_USER",
+                                    value: "grafana_user"
+                                },
+                                {
+                                    name: "POSTGRES_PASSWORD",
+                                    value: "your_password"
+                                },
+                                {
+                                    name: "POSTGRES_DB",
+                                    value: "grafana_db"
+                                }
+                            ],
                             ports: [
                                 {
                                     containerPort: PORT
                                 }
                             ],
                             readinessProbe: {
-                                httpGet: {
-                                    path: "/-/ready",
+                                tcpSocket: {
                                     port: PORT
                                 },
-                                initialDelaySeconds: 15,
-                                periodSeconds: 5
+                                initialDelaySeconds: 10,
+                                periodSeconds: 5,
                             },
-                            volumeMounts: [
-                                {
-                                    name: "config-volume",
-                                    mountPath: "/etc/prometheus"
-                                }
-                            ]
-                        }
-                    ],
-                    volumes: [
-                        {
-                            name: "config-volume",
-                            configMap: {
-                                name: PROM_CONFIG
-                            }
                         }
                     ]
                 }
             }
         }
-    }
+    };
 }

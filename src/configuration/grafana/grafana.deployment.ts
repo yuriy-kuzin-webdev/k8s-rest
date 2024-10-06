@@ -1,6 +1,6 @@
-import { Deployment } from "../../../types/Deployment";
-import { Kind } from "../../../types/Kind";
-import { COREDB, GRAFANA, PROMETHEUS } from "../../constants";
+import { Deployment } from "../../types/Deployment";
+import { Kind } from "../../types/Kind";
+import { COREDB, GRAFANA, PROMETHEUS } from "../constants";
 
 
 const {

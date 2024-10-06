@@ -1,6 +1,6 @@
-import { Kind } from "../../../types/Kind";
-import { Service } from "../../../types/Service";
-import { COREDB } from "../../constants";
+import { Kind } from "../../types/Kind";
+import { Service } from "../../types/Service";
+import { COREDB } from "../constants";
 
 
 const {

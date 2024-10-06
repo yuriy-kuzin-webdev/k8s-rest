@@ -1,6 +1,6 @@
-import { Service } from "../../types/Service";
-import { configureCoreDbService } from "./coreDB";
-import { configurePrometheusService } from "./prometheus";
+import { Service } from "../types/Service";
+import { configureCoreDbService } from "./core-db/coredb.service";
+import { configurePrometheusService } from "./prometheus/prometheus.service";
 
 
 export function configureServices(clientId: string): Service[] {

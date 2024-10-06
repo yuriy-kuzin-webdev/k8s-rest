@@ -1,6 +1,6 @@
-import { ConfigMap } from "../../../types/ConfigMap";
-import { Kind } from "../../../types/Kind";
-import { PROMETHEUS } from "../../constants";
+import { ConfigMap } from "../../types/ConfigMap";
+import { Kind } from "../../types/Kind";
+import { PROMETHEUS } from "../constants";
 
 
 const {
