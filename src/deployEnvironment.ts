@@ -25,6 +25,8 @@ export const deployEnvironment = async (clientId: string) => {
 
     await client.apply({ kubernetesObject: namespace });
 
+    // TODO Consider storage classes for isolation level
+
     for (const cmap of configmaps) {
         await client.apply({ kubernetesObject: cmap });
     }
@@ -39,4 +41,4 @@ export const deployEnvironment = async (clientId: string) => {
     }
 }
 
-deployEnvironment('test10v0321');
+deployEnvironment('test10v03210');

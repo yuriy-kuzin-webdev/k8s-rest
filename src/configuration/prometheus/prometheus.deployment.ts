@@ -12,6 +12,7 @@ const {
 } = PROMETHEUS;
 
 // TODO Decomposition required
+// TODO Consider StatefulSets
 export function configurePrometheus(clientId: string): Deployment {
     return {
         apiVersion: DEPLOYMENT_API_VERSION,

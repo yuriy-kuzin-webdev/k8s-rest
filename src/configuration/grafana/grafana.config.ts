@@ -23,7 +23,7 @@ datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
-    url: http://${PROMETHEUS.SERVICE_NAME}.${clientId}.svc.cluster.local:9090
+    url: http://${PROMETHEUS.SERVICE_NAME}.${clientId}.svc.cluster.local:${PROMETHEUS.PORT}
     isDefault: true
 `
         }

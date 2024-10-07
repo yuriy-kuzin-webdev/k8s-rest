@@ -11,6 +11,7 @@ const {
 } = COREDB;
 
 // TODO Decomposition required
+// TODO Consider StatefulSets
 export function configureCoreDB(clientId: string): Deployment {
     return {
         apiVersion: DEPLOYMENT_API_VERSION,

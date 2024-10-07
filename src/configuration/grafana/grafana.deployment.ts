@@ -11,7 +11,9 @@ const {
     SERVICE_NAME,
 } = GRAFANA;
 
+// TODO https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
 // TODO Decomposition required
+// TODO Consider StatefulSets
 export function configureGrafana(clientId: string): Deployment {
     return {
         apiVersion: DEPLOYMENT_API_VERSION,
