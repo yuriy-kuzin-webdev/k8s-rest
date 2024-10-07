@@ -39,4 +39,4 @@ export const deployEnvironment = async (clientId: string) => {
     }
 }
 
-deployEnvironment('test10v032');
+deployEnvironment('test10v0321');

@@ -6,6 +6,7 @@ import { COREDB, GRAFANA, PROMETHEUS } from "../constants";
 const {
     DEPLOYMENT_API_VERSION,
     IMAGE,
+    GRAFANA_CONFIG,
     PORT,
     SERVICE_NAME,
 } = GRAFANA;
@@ -46,6 +47,12 @@ export function configureGrafana(clientId: string): Deployment {
                                     containerPort: PORT
                                 }
                             ],
+                            volumeMounts: [
+                                {
+                                    name: GRAFANA_CONFIG,
+                                    mountPath: "/etc/grafana/provisioning/datasources"
+                                }
+                            ],
                             env: [
                                 {
                                     name: "GF_DATABASE_TYPE",
@@ -64,23 +71,26 @@ export function configureGrafana(clientId: string): Deployment {
                                     value: "your_password"
                                 },
                                 {
+                                    name: "GF_SECURITY_ADMIN_USER",
+                                    value: "grafana_user"
+                                },
+                                {
+                                    name: "GF_SECURITY_ADMIN_PASSWORD",
+                                    value: "your_password"
+                                },
+                                {
                                     name: "GF_DATABASE_NAME",
                                     value: "grafana_db"
                                 },
-                                {
-                                    name: "GF_DATASOURCES",
-                                    value: JSON.stringify({
-                                        datasources: [
-                                            {
-                                                name: "Prometheus",
-                                                type: "prometheus",
-                                                url: `http://${PROMETHEUS.SERVICE_NAME}.${clientId}.svc.cluster.local:${PROMETHEUS.PORT}`,
-                                                access: "proxy"
-                                            }
-                                        ]
-                                    })
-                                }
                             ]
+                        }
+                    ],
+                    volumes: [
+                        {
+                            name: GRAFANA_CONFIG,
+                            configMap: {
+                                name: GRAFANA_CONFIG
+                            }
                         }
                     ]
                 }

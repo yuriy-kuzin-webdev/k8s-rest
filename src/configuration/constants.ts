@@ -14,9 +14,11 @@ export const COREDB = {
 }
 
 export const GRAFANA = {
+    CONFIGMAP_API_VERSION,
     DEPLOYMENT_API_VERSION,
     IMAGE: "grafana/grafana:10.4.10",
     PORT: 3000,
+    GRAFANA_CONFIG: "grafana-config",
     SERVICE_API_VERSION,
     SERVICE_NAME: "grafana",
 }
