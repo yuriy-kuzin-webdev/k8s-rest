@@ -32,7 +32,7 @@ export class KubeClient {
         }
     }
 
-    async exec({ kubernetesObject }: { kubernetesObject: KubernetesObject }): Promise<void> {
+    async apply({ kubernetesObject }: { kubernetesObject: KubernetesObject }): Promise<void> {
         const url = this.getEndpoint(kubernetesObject.kind);
         const response = await fetch(url, {
             method: 'POST',
@@ -55,7 +55,7 @@ export class KubeClient {
         console.log(`${kubernetesObject} successfully applied.`);
     }
 
-    async check({ kubernetesObject }: { kubernetesObject: KubernetesObject }): Promise<boolean> {
+    async get({ kubernetesObject }: { kubernetesObject: KubernetesObject }): Promise<boolean> {
         const url = this.getEndpoint(kubernetesObject.kind);
         const response = await fetch(`${url}/${kubernetesObject.metadata.name}`, {
             method: 'GET',
@@ -85,7 +85,7 @@ export class KubeClient {
         while(!isReady) {
             // TODO import logger
             console.log(`Waiting for ${kubernetesObject.metadata.name }`);
-            isReady = await this.check({ kubernetesObject });
+            isReady = await this.get({ kubernetesObject });
             if(!isReady) {
                 // TODO import logger
                 console.log(`Not ready... Retrying in ${RETRY_MS} milliseconds`)

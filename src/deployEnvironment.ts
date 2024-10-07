@@ -23,18 +23,18 @@ export const deployEnvironment = async (clientId: string) => {
         services,
     } = configureEnvironment(clientId);
 
-    await client.exec({ kubernetesObject: namespace });
+    await client.apply({ kubernetesObject: namespace });
 
     for (const cmap of configmaps) {
-        await client.exec({ kubernetesObject: cmap });
+        await client.apply({ kubernetesObject: cmap });
     }
 
     for (const service of services) {
-        await client.exec({ kubernetesObject: service });
+        await client.apply({ kubernetesObject: service });
     }
 
     for (const deployment of deployments) {
-        await client.exec({ kubernetesObject: deployment });
+        await client.apply({ kubernetesObject: deployment });
         await client.wait({ kubernetesObject: deployment });
     }
 }
