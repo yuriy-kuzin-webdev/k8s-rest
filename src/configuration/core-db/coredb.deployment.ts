@@ -38,10 +38,24 @@ export function configureCoreDB(clientId: string): Deployment {
                     name: SERVICE_NAME
                 },
                 spec: {
+                    volumes: [
+                        {
+                            name: `${clientId}-${SERVICE_NAME}-storage`,
+                            persistentVolumeClaim: {
+                                claimName: `pvc-${clientId}-${SERVICE_NAME}`,
+                            }
+                        }
+                    ],
                     containers: [
                         {
                             name: SERVICE_NAME,
                             image: IMAGE,
+                            volumeMounts: [
+                                {
+                                    mountPath: "/var/lib/postgresql/data",
+                                    name: `${clientId}-${SERVICE_NAME}-storage`,
+                                },
+                            ],
                             env: [
                                 {
                                     name: "POSTGRES_USER",

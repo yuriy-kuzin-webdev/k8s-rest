@@ -20,15 +20,24 @@ export const deployEnvironment = async (clientId: string) => {
         namespace,
         configmaps,
         deployments,
+        pvs,
+        pvcs,
         services,
     } = configureEnvironment(clientId);
 
     await client.apply({ kubernetesObject: namespace });
 
-    // TODO Consider storage classes for isolation level
-
     for (const cmap of configmaps) {
         await client.apply({ kubernetesObject: cmap });
+    }
+    
+    // TODO Consider storage classes for isolation level
+    for (const pv of pvs) {
+        await client.apply({ kubernetesObject: pv });
+    }
+
+    for (const pvc of pvcs) {
+        await client.apply({ kubernetesObject: pvc });
     }
 
     for (const service of services) {

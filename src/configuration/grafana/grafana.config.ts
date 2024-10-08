@@ -16,6 +16,7 @@ export function configureGrafanaConfigMap(clientId: string): ConfigMap {
             name: GRAFANA_CONFIG,
             namespace: clientId
         },
+        // TODO js obj to yaml
         data: {
             "prometheus-datasource.yaml": `
 apiVersion: 1

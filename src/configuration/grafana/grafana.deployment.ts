@@ -40,6 +40,14 @@ export function configureGrafana(clientId: string): Deployment {
                     name: SERVICE_NAME
                 },
                 spec: {
+                    volumes: [
+                        {
+                            name: `${clientId}-${SERVICE_NAME}-storage`,
+                            persistentVolumeClaim: {
+                                claimName: `pvc-${clientId}-${SERVICE_NAME}`,
+                            }
+                        }
+                    ],
                     containers: [
                         {
                             name: SERVICE_NAME,
@@ -53,7 +61,11 @@ export function configureGrafana(clientId: string): Deployment {
                                 {
                                     name: GRAFANA_CONFIG,
                                     mountPath: "/etc/grafana/provisioning/datasources"
-                                }
+                                },
+                                {
+                                    mountPath: "/var/lib/grafana",
+                                    name: `${clientId}-${SERVICE_NAME}-storage`,
+                                },
                             ],
                             env: [
                                 {

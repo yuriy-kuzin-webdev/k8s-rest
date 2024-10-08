@@ -16,6 +16,7 @@ export function configurePrometheusConfigMap(clientId: string): ConfigMap {
             name: PROM_CONFIG,
             namespace: clientId
         },
+        // TODO js obj to yaml
         data: {
             "prometheus.yml": `
 global:

@@ -105,7 +105,12 @@ export type VolumeMount = {
 export type Volume = {
     name: string;                           // Name of the volume
     configMap?: ConfigMapVolumeSource;      // Volume source from a Kubernetes ConfigMap (optional)
+    persistentVolumeClaim?: PVC;
 };
+
+export type PVC = {
+    claimName: string;
+}
 
 export type ConfigMapVolumeSource = {
     name: string;                           // Name of the ConfigMap

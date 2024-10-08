@@ -23,9 +23,12 @@ export class KubeClient {
 
     private getEndpoint(kind: Kind) {
         switch (kind) {
+            // TODO this.url duplication
             case Kind.Namespace: return this.url + '/api/v1/namespaces';
             case Kind.Deployment: return this.url + `/apis/apps/v1/namespaces/${this.namespace}/deployments`;
             case Kind.ConfigMap: return this.url + `/api/v1/namespaces/${this.namespace}/configmaps`;
+            case Kind.PersistentVolume: return this.url + `/api/v1/persistentvolumes`;
+            case Kind.PersistentVolumeClaim: return this.url + `/api/v1/namespaces/${this.namespace}/persistentvolumeclaims`;
             case Kind.Service: return this.url + `/api/v1/namespaces/${this.namespace}/services`;
             
             default: throw new Error(`Unsupported Kubernetes kind: ${kind}`);

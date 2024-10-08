@@ -39,6 +39,14 @@ export function configurePrometheus(clientId: string): Deployment {
                     name: SERVICE_NAME
                 },
                 spec: {
+                    volumes: [
+                        {
+                            name: `${clientId}-${SERVICE_NAME}-storage`,
+                            persistentVolumeClaim: {
+                                claimName: `pvc-${clientId}-${SERVICE_NAME}`,
+                            }
+                        }
+                    ],
                     containers: [
                         {
                             name: SERVICE_NAME,
@@ -60,7 +68,11 @@ export function configurePrometheus(clientId: string): Deployment {
                                 {
                                     name: "config-volume",
                                     mountPath: "/etc/prometheus"
-                                }
+                                },
+                                {
+                                    mountPath: "/prometheus",
+                                    name: `${clientId}-${SERVICE_NAME}-storage`,
+                                },
                             ]
                         }
                     ],
