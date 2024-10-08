@@ -46,6 +46,12 @@ export function configureGrafana(clientId: string): Deployment {
                             persistentVolumeClaim: {
                                 claimName: `pvc-${clientId}-${SERVICE_NAME}`,
                             }
+                        },
+                        {
+                            name: GRAFANA_CONFIG,
+                            configMap: {
+                                name: GRAFANA_CONFIG
+                            }
                         }
                     ],
                     containers: [
@@ -63,8 +69,8 @@ export function configureGrafana(clientId: string): Deployment {
                                     mountPath: "/etc/grafana/provisioning/datasources"
                                 },
                                 {
-                                    mountPath: "/var/lib/grafana",
                                     name: `${clientId}-${SERVICE_NAME}-storage`,
+                                    mountPath: "/var/lib/grafana",
                                 },
                             ],
                             env: [
@@ -99,14 +105,6 @@ export function configureGrafana(clientId: string): Deployment {
                             ]
                         }
                     ],
-                    volumes: [
-                        {
-                            name: GRAFANA_CONFIG,
-                            configMap: {
-                                name: GRAFANA_CONFIG
-                            }
-                        }
-                    ]
                 }
             }
         }

@@ -6,6 +6,7 @@ import { PROMETHEUS } from "../constants";
 const {
     PVC_API_VERSION,
     SERVICE_NAME,
+    STORAGE_CLASS_NAME
 } = PROMETHEUS;
 
 export function configurePrometheusPVC(clientId: string): PersistentVolumeClaim {
@@ -17,12 +18,14 @@ export function configurePrometheusPVC(clientId: string): PersistentVolumeClaim 
             namespace: clientId
         },
         spec: {
-            accessModes: [ "ReadWriteOnce" ],
+            accessModes: [ "ReadWriteMany" ],
             resources: {
                 requests: {
-                    storage: "1Gi"
+                    storage: "5Gi"
                 }
-            }
+            },
+            volumeName: `pv-${clientId}-${SERVICE_NAME}`,
+            storageClassName: STORAGE_CLASS_NAME
         }
     }
 }

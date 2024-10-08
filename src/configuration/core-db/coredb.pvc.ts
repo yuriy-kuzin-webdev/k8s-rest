@@ -6,6 +6,7 @@ import { COREDB } from "../constants";
 const {
     PVC_API_VERSION,
     SERVICE_NAME,
+    STORAGE_CLASS_NAME
 } = COREDB;
 
 export function configureCoreDbPVC(clientId: string): PersistentVolumeClaim {
@@ -17,12 +18,14 @@ export function configureCoreDbPVC(clientId: string): PersistentVolumeClaim {
             namespace: clientId
         },
         spec: {
-            accessModes: [ "ReadWriteOnce" ],
+            accessModes: [ "ReadWriteMany" ],
             resources: {
                 requests: {
-                    storage: "1Gi"
+                    storage: "5Gi"
                 }
-            }
+            },
+            volumeName: `pv-${clientId}-${SERVICE_NAME}`,
+            storageClassName: STORAGE_CLASS_NAME
         }
     }
 }

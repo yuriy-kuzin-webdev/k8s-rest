@@ -6,6 +6,8 @@ import { COREDB } from "../constants";
 const {
     PV_API_VERSION,
     SERVICE_NAME,
+    STORAGE_CLASS_BASE_PATH,
+    STORAGE_CLASS_NAME,
 } = COREDB;
 
 export function configureCoreDbPV(clientId: string): PersistentVolume {
@@ -17,17 +19,19 @@ export function configureCoreDbPV(clientId: string): PersistentVolume {
         },
         spec: {
             capacity: {
-                storage: "1Gi"
+                storage: "5Gi"
             },
-            accessModes: [ "ReadWriteOnce" ],
+            accessModes: [ "ReadWriteMany" ],
             persistentVolumeReclaimPolicy: "Retain",
-            hostPath: {
-                path: `/mnt/data/${clientId}/${SERVICE_NAME}`
+            nfs: {
+                path: `${STORAGE_CLASS_BASE_PATH}/${clientId}/${SERVICE_NAME}`,
+                server: process.env.NFS_SERVER || '',
             },
             claimRef: {
                 namespace: clientId,
                 name: `pvc-${clientId}-${SERVICE_NAME}`,
-            }
+            },
+            storageClassName: STORAGE_CLASS_NAME,
         }
     }
 }

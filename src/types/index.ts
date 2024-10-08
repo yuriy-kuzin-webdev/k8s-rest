@@ -4,6 +4,7 @@ import { Namespace } from "./Namespace";
 import { PersistentVolume } from "./PersistentVolume";
 import { PersistentVolumeClaim } from "./PersistentVolumeClaim";
 import { Service } from "./Service";
+import { StorageClass } from "./StorageClass";
 
 
 export type KubernetesObject = 
@@ -12,4 +13,5 @@ export type KubernetesObject =
     | Namespace
     | PersistentVolume
     | PersistentVolumeClaim
-    | Service ;
+    | Service
+    | StorageClass;

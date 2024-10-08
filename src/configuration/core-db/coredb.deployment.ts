@@ -52,8 +52,8 @@ export function configureCoreDB(clientId: string): Deployment {
                             image: IMAGE,
                             volumeMounts: [
                                 {
-                                    mountPath: "/var/lib/postgresql/data",
                                     name: `${clientId}-${SERVICE_NAME}-storage`,
+                                    mountPath: "/var/lib/postgresql/data",
                                 },
                             ],
                             env: [

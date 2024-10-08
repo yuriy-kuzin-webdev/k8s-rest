@@ -18,6 +18,7 @@ export type Metadata = {
 export type PersistentVolumeSpec = {
     capacity: Record<string, string>;       // Capacity of the persistent volume (e.g., {"storage": "10Gi"})
     accessModes: string[];                  // Access modes for the persistent volume (e.g., ["ReadWriteOnce"])
+    nfs?: NFSVolumeSource;
     persistentVolumeReclaimPolicy?: string; // Reclaim policy (e.g., "Retain", "Recycle", "Delete")
     storageClassName?: string;              // Storage class associated with the persistent volume (optional)
     hostPath?: HostPathVolumeSource;        // Host path source (optional)

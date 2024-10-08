@@ -30,6 +30,7 @@ export class KubeClient {
             case Kind.PersistentVolume: return this.url + `/api/v1/persistentvolumes`;
             case Kind.PersistentVolumeClaim: return this.url + `/api/v1/namespaces/${this.namespace}/persistentvolumeclaims`;
             case Kind.Service: return this.url + `/api/v1/namespaces/${this.namespace}/services`;
+            case Kind.StorageClass: return this.url + '/apis/storage.k8s.io/v1/storageclasses';
             
             default: throw new Error(`Unsupported Kubernetes kind: ${kind}`);
         }

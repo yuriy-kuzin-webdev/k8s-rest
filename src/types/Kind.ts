@@ -5,4 +5,5 @@ export enum Kind {
     PersistentVolume = 'PersistentVolume',
     PersistentVolumeClaim = 'PersistentVolumeClaim',
     Service = 'Service',
+    StorageClass = 'StorageClass',
 };
